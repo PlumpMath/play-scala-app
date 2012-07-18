@@ -1,0 +1,10 @@
+@(id: Long, categoryForm: Form[models.Category])
+
+@import helper._
+
+
+@main() {
+	@form(action = routes.CategoryController.update(id)) {
+		@category.form("Update Category",categoryForm)
+	}
+}

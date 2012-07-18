@@ -1,0 +1,44 @@
+@(title: String, issueForm: Form[models.Issue])
+
+@import helper._
+
+<table class="table">
+    <thead>
+    	<tr><th  colspan="2">@title</th></tr>
+    </thead>	
+    <tbody>	
+    <tr>	    	
+    	<td>@inputText(field=issueForm("number"), args = 'class -> "input-large", 'placeholder -> "number", '_label -> "Jira Issue")		
+    	</td>           
+        <td>
+            @select(field=issueForm("categoryid"), 
+                models.Category.options, 
+                '_label -> "Category", 
+                '_default -> "-- Choose a category --")        
+        </td>
+    </tr>
+    <tr>            
+        <td>@textarea(field=issueForm("resolution"), args = 'rows -> 3, 'cols -> 50, 'class -> "input-large", 'placeholder -> "ressolution", '_label -> "Resolution")        
+        </td>               
+        <td>
+            @inputText(field=issueForm("fixedondate"), args = 'class -> "input-large", '_label -> "Fixed on Date")
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+	<tr>
+    	<td colspan="2"><button type="submit" class="btn btn-primary">Save</button></td> 	
+    </tr>	
+	</tfoot>
+</table>
+
+<script type="text/javascript">
+    $(function() {
+        $("#fixedondate").datepicker({dateFormat:"dd-mm-yy"});
+        
+        $("#fixedondate").keypress(function() {
+                return false;
+        });
+        
+    });
+</script>

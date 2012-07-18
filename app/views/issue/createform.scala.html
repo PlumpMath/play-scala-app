@@ -1,0 +1,10 @@
+@(issueForm: Form[models.Issue])
+
+@import helper._
+
+
+@main() {
+	@form(action = routes.IssueController.save) {
+		@issue.form("Create Issue",issueForm)
+	}
+}

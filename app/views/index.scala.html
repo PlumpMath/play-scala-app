@@ -1,0 +1,28 @@
+@(reportList: List[(Int,Long)])
+
+@main() {
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Nr. Of Issues']
+          @for((monthnr: Int, count: Long) <- reportList){
+          	,['@controllers.Application.get_month(monthnr)',  @count]
+          }
+        ]);
+
+        var options = {
+          title: 'Production Issues - @java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)',
+          hAxis: {title: 'Months', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <div id="chart_div" style="height: 400px;"></div>
+    
+}

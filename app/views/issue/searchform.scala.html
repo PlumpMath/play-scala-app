@@ -1,0 +1,71 @@
+@(issueSearchForm: Form[_], issues: List[(models.Issue,Option[models.Category])] = null)
+
+@import helper._
+@import models._
+@import controllers._
+
+@main() {
+	
+	@form(action = routes.IssueController.search) {
+		<table class="table">
+	    <thead>
+	    	<tr><th colspan="2">Search Issues</th></tr>
+	    </thead>	
+	    <tbody>	
+	    <tr>	    	
+	    	<td>
+	    		@select(field=issueSearchForm("year"), options = options(IssueController.yearOptions()), args= '_label -> "Year")
+	    	</td> 
+	    	<td>
+	    		@select(field=issueSearchForm("month"), options = options(IssueController.monthOptions()), args= '_label -> "Month")
+	    	</td>	    	
+	    </tr>	
+		</tbody>
+		<tfoot>
+		<tr>
+	    	<td colspan="2"><button id="searchbtn" type="submit" class="btn btn-primary">Search</button></td> 	
+	    </tr>	
+		</tfoot>
+		</table>
+	}
+
+	@if(issues!=null) {
+
+		<table class="table table-striped table-bordered table-condensed">
+		    <thead>	        
+		        <tr>
+		            <th>Number</th>            
+		            <th>Category</th>
+		            <th>Fixed on Date</th>
+		        </tr>        
+		    </thead>	     
+		    <tbody>	
+
+		    	@issues.map { 
+	                case (issue, category) => {		    
+				    <tr>	    	             
+				    	<td>
+				    		@issue.number
+				    	</td> 		    	
+				    	<td>
+				    		@category.get.description
+				    	</td> 		    	
+				    	<td>
+				    		@issue.fixedondate.map(_.format("dd-MM-yyyy")).getOrElse { <em>-</em> }
+				    	</td> 		    	
+				    </tr>	    
+					}
+				}
+		 	</tbody>		 	
+		</table>
+
+		<script type="text/javascript">
+			$(function(){
+				$("a#issuenr").tooltip();
+			})
+		</script>
+
+	}
+	
+
+}

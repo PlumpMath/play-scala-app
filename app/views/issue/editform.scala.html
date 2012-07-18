@@ -1,0 +1,10 @@
+@(id: Long, issueForm: Form[models.Issue])
+
+@import helper._
+
+
+@main() {
+	@form(action = routes.IssueController.update(id)) {
+		@issue.form("Update Issue",issueForm)
+	}
+}

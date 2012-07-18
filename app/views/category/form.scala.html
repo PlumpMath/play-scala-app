@@ -1,0 +1,20 @@
+@(title: String,categoryForm: Form[models.Category])
+
+@import helper._
+
+<table class="table">
+    <thead>
+    	<tr><th>@title</th></tr>
+    </thead>	
+    <tbody>	
+    <tr>	    	
+    	<td>@inputText(field=categoryForm("description"), args = 'class -> "input-large", 'placeholder -> "description", '_label -> "Description")		
+    	</td>
+    </tr>
+    </tbody>
+    <tfoot>
+	<tr>
+    	<td><button type="submit" class="btn btn-primary">Save</button></td> 	
+    </tr>	
+	</tfoot>
+</table>

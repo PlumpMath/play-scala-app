@@ -1,0 +1,27 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Category
+GET 	/category					controllers.CategoryController.categories
+GET 	/u/category/:id				controllers.CategoryController.edit(id: Long)
+POST 	/u/category/:id 			controllers.CategoryController.update(id: Long)
+GET 	/a/category 				controllers.CategoryController.create
+POST 	/a/category 				controllers.CategoryController.save
+
+# Issue
+GET 	/issue 						controllers.IssueController.issues
+GET 	/u/issue/:id				controllers.IssueController.edit(id: Long)
+POST 	/u/issue/:id 				controllers.IssueController.update(id: Long)
+GET 	/a/issue 					controllers.IssueController.create
+POST 	/a/issue 	 				controllers.IssueController.save
+
+GET 	/search 					controllers.IssueController.get_search
+POST 	/search 					controllers.IssueController.search
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,0 +1,24 @@
+<ul class="nav nav-list">   
+    <li class="nav-header">KISS</li>
+	<li lid="category"><a href="@routes.CategoryController.categories"><i class="icon-star-empty"></i>Category</a></li>
+	<li lid="issue"><a href="@routes.IssueController.issues"><i class="icon-star-empty"></i>Issue</a></li>
+
+    <li class="divider"></li>
+    <li class="nav-header">Report</li>
+    <li lid="search"><a href="@routes.IssueController.get_search"><i class="icon-cog"></i>Search Issues</a></li>    
+
+</ul>
+
+<script type="text/javascript">
+	$(function(){
+		var url=$(location).attr('href');
+		var links=$("li[lid]");
+		$("li.active").attr("class","");
+		$.each(links,function(i,liobject){
+			var linkid=$(this).attr("lid");
+			if(url.indexOf("/"+linkid)>=0){
+				$(liobject).attr("class","active");				
+			}
+		});			
+	});
+</script>

@@ -1,0 +1,10 @@
+@(categoryForm: Form[models.Category])
+
+@import helper._
+
+
+@main() {
+	@form(action = routes.CategoryController.save) {
+		@category.form("Create Category",categoryForm)
+	}
+}
